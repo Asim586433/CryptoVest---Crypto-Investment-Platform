@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CryptoVest | Crypto Investment Platform</title>
+    <title>CryptoVest | Secure Crypto Investment Platform</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Base Styles */
@@ -19,8 +19,8 @@
             --danger: #ff3d00;
             --warning: #ffab00;
             --success: #00c853;
-            --border-radius: 8px;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --border-radius: 10px;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
             --transition: all 0.3s ease;
         }
 
@@ -35,6 +35,7 @@
             background-color: var(--dark);
             color: var(--light);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         a {
@@ -51,13 +52,14 @@
 
         .btn {
             display: inline-block;
-            padding: 12px 24px;
+            padding: 12px 28px;
             border-radius: var(--border-radius);
             font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
             border: none;
             font-size: 16px;
+            text-align: center;
         }
 
         .btn-primary {
@@ -68,6 +70,7 @@
         .btn-primary:hover {
             background-color: var(--primary-dark);
             transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(41, 98, 255, 0.3);
         }
 
         .btn-secondary {
@@ -78,11 +81,12 @@
         .btn-secondary:hover {
             background-color: var(--secondary-dark);
             transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 200, 83, 0.3);
         }
 
         .btn-outline {
             background-color: transparent;
-            border: 1px solid var(--primary);
+            border: 2px solid var(--primary);
             color: var(--primary);
         }
 
@@ -90,14 +94,31 @@
             background-color: rgba(41, 98, 255, 0.1);
         }
 
+        .btn-danger {
+            background-color: var(--danger);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #d32f2f;
+            transform: translateY(-2px);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 14px;
+        }
+
         /* Header & Navigation */
         header {
             background-color: var(--dark-light);
-            padding: 20px 0;
+            padding: 18px 0;
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
             box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
+            background-color: rgba(30, 41, 59, 0.95);
         }
 
         .header-container {
@@ -109,14 +130,22 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 24px;
+            gap: 12px;
+            font-size: 26px;
             font-weight: 700;
             color: white;
         }
 
         .logo i {
             color: var(--secondary);
+            font-size: 28px;
+        }
+
+        .logo-text {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         nav ul {
@@ -130,6 +159,9 @@
             transition: var(--transition);
             padding: 8px 0;
             position: relative;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         nav a:hover {
@@ -146,53 +178,77 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 2px;
+            height: 3px;
             background-color: var(--primary);
+            border-radius: 2px;
         }
 
         .user-actions {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
         }
 
         .user-profile {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             cursor: pointer;
+            padding: 8px 12px;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .user-profile:hover {
+            background-color: rgba(255, 255, 255, 0.05);
         }
 
         .avatar {
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
-            background-color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 600;
+            font-weight: 700;
+            font-size: 18px;
+            color: white;
         }
 
         .notification {
             position: relative;
             cursor: pointer;
-            font-size: 20px;
+            font-size: 22px;
+            padding: 8px;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .notification:hover {
+            background-color: rgba(255, 255, 255, 0.05);
         }
 
         .notification-badge {
             position: absolute;
-            top: -5px;
-            right: -5px;
+            top: 0;
+            right: 0;
             background-color: var(--danger);
             color: white;
             border-radius: 50%;
-            width: 18px;
-            height: 18px;
+            width: 20px;
+            height: 20px;
             font-size: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-weight: 700;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
         }
 
         /* Main Content */
@@ -201,61 +257,105 @@
             padding: 40px 0;
         }
 
+        .page {
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .page-title {
-            margin-bottom: 30px;
+            margin-bottom: 35px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
         }
 
         .page-title h1 {
-            font-size: 32px;
+            font-size: 36px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-subtitle {
+            color: var(--gray);
+            margin-top: 8px;
+            font-size: 18px;
         }
 
         /* Dashboard Overview */
         .overview-cards {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
+            gap: 25px;
+            margin-bottom: 50px;
         }
 
         .card {
             background-color: var(--dark-light);
             border-radius: var(--border-radius);
-            padding: 24px;
+            padding: 28px;
             box-shadow: var(--shadow);
             transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+            border-color: rgba(41, 98, 255, 0.2);
         }
 
         .card-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .card-title {
             font-size: 16px;
             color: var(--gray);
             font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            background-color: rgba(41, 98, 255, 0.1);
+            color: var(--primary);
         }
 
         .card-value {
-            font-size: 32px;
+            font-size: 36px;
             font-weight: 700;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            font-family: 'Monospace', 'Courier New', monospace;
         }
 
         .card-change {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 8px;
             font-weight: 600;
+            font-size: 15px;
+        }
+
+        .card-change i {
+            font-size: 14px;
         }
 
         .positive {
@@ -271,12 +371,19 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 20px;
         }
 
         .section-title {
-            font-size: 24px;
-            font-weight: 600;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            color: var(--gray);
+            margin-top: 5px;
         }
 
         .market-table {
@@ -285,26 +392,29 @@
             border-radius: var(--border-radius);
             overflow: hidden;
             box-shadow: var(--shadow);
+            margin-bottom: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .table-header {
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
-            padding: 20px;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
+            padding: 22px;
             font-weight: 600;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(0, 0, 0, 0.1);
         }
 
         .table-row {
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
-            padding: 20px;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
+            padding: 22px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             transition: var(--transition);
         }
 
         .table-row:hover {
-            background-color: rgba(255, 255, 255, 0.05);
+            background-color: rgba(255, 255, 255, 0.03);
         }
 
         .table-row:last-child {
@@ -314,105 +424,312 @@
         .crypto-info {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
         }
 
         .crypto-icon {
-            width: 36px;
-            height: 36px;
+            width: 46px;
+            height: 46px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 600;
-            font-size: 14px;
+            font-weight: 700;
+            font-size: 18px;
+            color: white;
+        }
+
+        .crypto-name-symbol {
+            display: flex;
+            flex-direction: column;
         }
 
         .crypto-name {
-            font-weight: 600;
+            font-weight: 700;
+            font-size: 17px;
         }
 
         .crypto-symbol {
             color: var(--gray);
             font-size: 14px;
+            margin-top: 3px;
         }
 
         /* Portfolio Section */
         .portfolio-chart-container {
             background-color: var(--dark-light);
             border-radius: var(--border-radius);
-            padding: 24px;
-            margin-bottom: 40px;
+            padding: 28px;
+            margin-bottom: 50px;
             box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .chart-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 20px;
         }
 
         .chart-actions {
             display: flex;
-            gap: 10px;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .chart-actions .btn-outline.active {
+            background-color: rgba(41, 98, 255, 0.2);
+            border-color: var(--primary);
+            color: var(--primary);
         }
 
         .chart-placeholder {
-            height: 300px;
+            height: 320px;
             background: linear-gradient(135deg, rgba(41, 98, 255, 0.1), rgba(0, 200, 83, 0.1));
             border-radius: var(--border-radius);
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-direction: column;
             font-size: 18px;
             color: var(--gray);
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+        }
+
+        .chart-placeholder i {
+            font-size: 48px;
+            margin-bottom: 20px;
+            opacity: 0.5;
         }
 
         .portfolio-assets {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 20px;
+            gap: 25px;
+            margin-bottom: 40px;
         }
 
         .asset-card {
             background-color: var(--dark-light);
             border-radius: var(--border-radius);
-            padding: 20px;
+            padding: 24px;
             box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+        }
+
+        .asset-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
         }
 
         .asset-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .asset-info {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
         }
 
         .asset-amount {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: 700;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            font-family: 'Monospace', 'Courier New', monospace;
         }
 
         .asset-value {
-            font-size: 16px;
+            font-size: 17px;
             color: var(--gray);
         }
 
         .asset-actions {
             display: flex;
-            gap: 10px;
-            margin-top: 15px;
+            gap: 12px;
+            margin-top: 20px;
         }
 
-        /* Investment Modal */
+        /* Investment Page */
+        .investment-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .investment-card {
+            background-color: var(--dark-light);
+            border-radius: var(--border-radius);
+            padding: 28px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .investment-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .investment-card.featured {
+            border: 2px solid var(--secondary);
+            position: relative;
+        }
+
+        .investment-card.featured::before {
+            content: 'RECOMMENDED';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--secondary);
+            color: white;
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .investment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .investment-title {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .investment-badge {
+            background-color: rgba(41, 98, 255, 0.2);
+            color: var(--primary);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .investment-details {
+            margin-bottom: 25px;
+            flex-grow: 1;
+        }
+
+        .investment-details p {
+            color: var(--gray);
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+
+        .investment-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--gray);
+            margin-top: 5px;
+        }
+
+        /* Security Page */
+        .security-settings {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .security-card {
+            background-color: var(--dark-light);
+            border-radius: var(--border-radius);
+            padding: 28px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .security-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .security-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            background-color: rgba(41, 98, 255, 0.1);
+            color: var(--primary);
+        }
+
+        .security-title {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .security-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .status-dot.active {
+            background-color: var(--success);
+        }
+
+        .status-dot.inactive {
+            background-color: var(--danger);
+        }
+
+        .security-description {
+            color: var(--gray);
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+
+        .security-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -420,10 +737,12 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 2000;
             align-items: center;
             justify-content: center;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
         }
 
         .modal.active {
@@ -433,49 +752,67 @@
         .modal-content {
             background-color: var(--dark-light);
             width: 90%;
-            max-width: 500px;
+            max-width: 550px;
             border-radius: var(--border-radius);
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            padding: 35px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: slideUp 0.4s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .modal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
 
         .modal-title {
-            font-size: 24px;
-            font-weight: 600;
+            font-size: 26px;
+            font-weight: 700;
         }
 
         .close-modal {
-            font-size: 24px;
+            font-size: 28px;
             cursor: pointer;
             transition: var(--transition);
+            padding: 5px;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .close-modal:hover {
+            background-color: rgba(255, 255, 255, 0.05);
             color: var(--danger);
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .form-label {
             display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
+            margin-bottom: 10px;
+            font-weight: 600;
+            font-size: 16px;
         }
 
         .form-input {
             width: 100%;
-            padding: 12px 16px;
+            padding: 15px 18px;
             background-color: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.1);
             border-radius: var(--border-radius);
             color: white;
             font-size: 16px;
@@ -485,44 +822,132 @@
         .form-input:focus {
             outline: none;
             border-color: var(--primary);
+            background-color: rgba(41, 98, 255, 0.05);
+        }
+
+        .form-hint {
+            font-size: 14px;
+            color: var(--gray);
+            margin-top: 8px;
         }
 
         .form-actions {
             display: flex;
             gap: 15px;
-            margin-top: 30px;
+            margin-top: 35px;
         }
 
         .crypto-selector {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
         }
 
         .crypto-option {
-            flex: 1;
-            padding: 12px;
+            padding: 18px;
             background-color: rgba(255, 255, 255, 0.05);
             border-radius: var(--border-radius);
             text-align: center;
             cursor: pointer;
             transition: var(--transition);
-            border: 1px solid transparent;
+            border: 2px solid transparent;
         }
 
         .crypto-option:hover {
             background-color: rgba(41, 98, 255, 0.1);
+            transform: translateY(-3px);
         }
 
         .crypto-option.active {
             border-color: var(--primary);
             background-color: rgba(41, 98, 255, 0.2);
+            box-shadow: 0 5px 15px rgba(41, 98, 255, 0.2);
+        }
+
+        /* Transaction History */
+        .transaction-history {
+            margin-bottom: 50px;
+        }
+
+        .transaction-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: var(--dark-light);
+            border-radius: var(--border-radius);
+            margin-bottom: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+        }
+
+        .transaction-item:hover {
+            background-color: rgba(255, 255, 255, 0.03);
+            transform: translateX(5px);
+        }
+
+        .transaction-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .transaction-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+
+        .transaction-icon.buy {
+            background-color: rgba(0, 200, 83, 0.1);
+            color: var(--success);
+        }
+
+        .transaction-icon.sell {
+            background-color: rgba(255, 61, 0, 0.1);
+            color: var(--danger);
+        }
+
+        .transaction-icon.deposit {
+            background-color: rgba(41, 98, 255, 0.1);
+            color: var(--primary);
+        }
+
+        .transaction-details h4 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .transaction-details p {
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        .transaction-amount {
+            text-align: right;
+        }
+
+        .transaction-amount .amount {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .transaction-amount .date {
+            color: var(--gray);
+            font-size: 14px;
         }
 
         /* Footer */
         footer {
             background-color: var(--dark-light);
-            padding: 40px 0;
+            padding: 50px 0 30px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
@@ -530,11 +955,12 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 40px;
+            margin-bottom: 40px;
         }
 
         .footer-section h3 {
-            font-size: 18px;
-            margin-bottom: 20px;
+            font-size: 20px;
+            margin-bottom: 25px;
             color: white;
         }
 
@@ -543,16 +969,24 @@
         }
 
         .footer-links li {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .footer-links a {
             color: var(--gray);
             transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .footer-links a:hover {
             color: var(--secondary);
+            transform: translateX(5px);
+        }
+
+        .footer-links a i {
+            font-size: 12px;
         }
 
         .copyright {
@@ -561,60 +995,88 @@
             margin-top: 30px;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
             color: var(--gray);
-            font-size: 14px;
+            font-size: 15px;
         }
 
         /* Responsive */
+        @media (max-width: 1100px) {
+            .security-settings {
+                grid-template-columns: 1fr;
+            }
+        }
+
         @media (max-width: 992px) {
             nav ul {
-                gap: 15px;
+                gap: 20px;
             }
             
             .overview-cards {
                 grid-template-columns: repeat(2, 1fr);
             }
+            
+            .portfolio-assets, .investment-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .table-header, .table-row {
+                grid-template-columns: 2fr 1fr 1fr 1fr;
+            }
+            
+            .table-header :nth-child(5), .table-row :nth-child(5),
+            .table-header :nth-child(6), .table-row :nth-child(6) {
+                display: none;
+            }
         }
 
         @media (max-width: 768px) {
             .header-container {
-                flex-direction: column;
-                gap: 20px;
+                position: relative;
+            }
+            
+            nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--dark-light);
+                padding: 20px;
+                border-radius: 0 0 var(--border-radius) var(--border-radius);
+                box-shadow: var(--shadow);
+                z-index: 100;
+            }
+            
+            nav.active {
+                display: block;
             }
             
             nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav a {
+                padding: 12px 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
             }
             
             .overview-cards {
                 grid-template-columns: 1fr;
             }
             
-            .table-header, .table-row {
-                grid-template-columns: 2fr 1fr 1fr;
-            }
-            
-            .table-header :nth-child(4), .table-row :nth-child(4),
-            .table-header :nth-child(5), .table-row :nth-child(5) {
-                display: none;
-            }
-            
-            .portfolio-assets {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .page-title {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 15px;
-            }
-            
             .section-header {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 15px;
+                gap: 20px;
+            }
+            
+            .page-title {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
             }
             
             .chart-actions {
@@ -625,6 +1087,41 @@
             .form-actions {
                 flex-direction: column;
             }
+            
+            .crypto-selector {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .card-value {
+                font-size: 30px;
+            }
+            
+            .section-title {
+                font-size: 24px;
+            }
+            
+            .page-title h1 {
+                font-size: 30px;
+            }
+            
+            .crypto-selector {
+                grid-template-columns: 1fr;
+            }
+            
+            .transaction-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .transaction-amount {
+                text-align: left;
+                width: 100%;
+                padding-top: 15px;
+                border-top: 1px solid rgba(255, 255, 255, 0.05);
+            }
         }
     </style>
 </head>
@@ -634,30 +1131,38 @@
         <div class="container header-container">
             <div class="logo">
                 <i class="fas fa-coins"></i>
-                <span>CryptoVest</span>
+                <span class="logo-text">CryptoVest</span>
             </div>
             
-            <nav>
+            <div class="mobile-menu-btn" id="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <nav id="main-nav">
                 <ul>
-                    <li><a href="#" class="active" id="nav-dashboard">Dashboard</a></li>
-                    <li><a href="#" id="nav-portfolio">Portfolio</a></li>
-                    <li><a href="#" id="nav-market">Market</a></li>
-                    <li><a href="#" id="nav-invest">Invest</a></li>
-                    <li><a href="#" id="nav-security">Security</a></li>
+                    <li><a href="#" class="active" id="nav-dashboard"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a href="#" id="nav-portfolio"><i class="fas fa-chart-pie"></i> Portfolio</a></li>
+                    <li><a href="#" id="nav-market"><i class="fas fa-chart-line"></i> Market</a></li>
+                    <li><a href="#" id="nav-invest"><i class="fas fa-hand-holding-usd"></i> Invest</a></li>
+                    <li><a href="#" id="nav-security"><i class="fas fa-shield-alt"></i> Security</a></li>
+                    <li><a href="#" id="nav-history"><i class="fas fa-history"></i> History</a></li>
                 </ul>
             </nav>
             
             <div class="user-actions">
-                <div class="notification">
+                <div class="notification" id="notification-btn">
                     <i class="far fa-bell"></i>
                     <span class="notification-badge">3</span>
                 </div>
-                <div class="user-profile">
+                <div class="user-profile" id="user-profile-btn">
                     <div class="avatar">JS</div>
                     <div>
                         <div class="user-name">John Smith</div>
-                        <div class="user-tier" style="font-size: 12px; color: var(--secondary);">Premium Member</div>
+                        <div class="user-tier" style="font-size: 13px; color: var(--secondary); font-weight: 600;">
+                            <i class="fas fa-crown"></i> Premium Member
+                        </div>
                     </div>
+                    <i class="fas fa-chevron-down" style="font-size: 14px;"></i>
                 </div>
             </div>
         </div>
@@ -669,7 +1174,10 @@
             <!-- Dashboard Page (Default) -->
             <div id="dashboard-page" class="page">
                 <div class="page-title">
-                    <h1>Dashboard</h1>
+                    <div>
+                        <h1>Dashboard</h1>
+                        <div class="page-subtitle">Welcome back, John. Here's your portfolio overview.</div>
+                    </div>
                     <div class="date-display" id="current-date"></div>
                 </div>
                 
@@ -678,55 +1186,91 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="card-title">Total Portfolio Value</div>
-                            <i class="fas fa-chart-line" style="color: var(--primary);"></i>
+                            <div class="card-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
                         </div>
                         <div class="card-value">$42,850.75</div>
                         <div class="card-change positive">
                             <i class="fas fa-arrow-up"></i>
-                            <span>+12.5%</span>
+                            <span>+12.5% this month</span>
                         </div>
                     </div>
                     
                     <div class="card">
                         <div class="card-header">
                             <div class="card-title">24h Change</div>
-                            <i class="fas fa-exchange-alt" style="color: var(--secondary);"></i>
+                            <div class="card-icon">
+                                <i class="fas fa-exchange-alt"></i>
+                            </div>
                         </div>
                         <div class="card-value">+$1,240.30</div>
                         <div class="card-change positive">
                             <i class="fas fa-arrow-up"></i>
-                            <span>+3.2%</span>
+                            <span>+3.2% today</span>
                         </div>
                     </div>
                     
                     <div class="card">
                         <div class="card-header">
                             <div class="card-title">Available Balance</div>
-                            <i class="fas fa-wallet" style="color: var(--warning);"></i>
+                            <div class="card-icon">
+                                <i class="fas fa-wallet"></i>
+                            </div>
                         </div>
                         <div class="card-value">$5,250.00</div>
                         <div class="card-change">
-                            <span>Ready to invest</span>
+                            <span><i class="fas fa-plus-circle"></i> Ready to invest</span>
                         </div>
                     </div>
                     
                     <div class="card">
                         <div class="card-header">
                             <div class="card-title">Risk Level</div>
-                            <i class="fas fa-shield-alt" style="color: var(--success);"></i>
+                            <div class="card-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
                         </div>
                         <div class="card-value">Medium</div>
                         <div class="card-change">
-                            <span>Balanced portfolio</span>
+                            <span><i class="fas fa-balance-scale"></i> Balanced portfolio</span>
                         </div>
                     </div>
                 </div>
                 
+                <!-- Quick Actions -->
+                <div class="section-header">
+                    <div>
+                        <h2 class="section-title">Quick Actions</h2>
+                        <div class="section-subtitle">Manage your investments quickly</div>
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 20px; margin-bottom: 50px; flex-wrap: wrap;">
+                    <button class="btn btn-primary" id="quick-invest-btn">
+                        <i class="fas fa-plus-circle"></i> Quick Invest
+                    </button>
+                    <button class="btn btn-outline" id="quick-withdraw-btn">
+                        <i class="fas fa-download"></i> Withdraw Funds
+                    </button>
+                    <button class="btn btn-outline" id="quick-transfer-btn">
+                        <i class="fas fa-exchange-alt"></i> Transfer Assets
+                    </button>
+                    <button class="btn btn-outline" id="quick-report-btn">
+                        <i class="fas fa-file-alt"></i> Generate Report
+                    </button>
+                </div>
+                
                 <!-- Market Overview -->
                 <div class="section-header">
-                    <h2 class="section-title">Market Overview</h2>
                     <div>
-                        <button class="btn btn-outline" id="refresh-market">Refresh Data</button>
+                        <h2 class="section-title">Market Overview</h2>
+                        <div class="section-subtitle">Top cryptocurrencies by market cap</div>
+                    </div>
+                    <div>
+                        <button class="btn btn-outline" id="refresh-market">
+                            <i class="fas fa-sync-alt"></i> Refresh Data
+                        </button>
                     </div>
                 </div>
                 
@@ -736,13 +1280,14 @@
                         <div>Price</div>
                         <div>24h Change</div>
                         <div>Market Cap</div>
+                        <div>Volume (24h)</div>
                         <div>Action</div>
                     </div>
                     
                     <div class="table-row">
                         <div class="crypto-info">
                             <div class="crypto-icon" style="background-color: #f7931a;">B</div>
-                            <div>
+                            <div class="crypto-name-symbol">
                                 <div class="crypto-name">Bitcoin</div>
                                 <div class="crypto-symbol">BTC</div>
                             </div>
@@ -750,13 +1295,14 @@
                         <div>$63,420.50</div>
                         <div class="positive">+2.4%</div>
                         <div>$1.25T</div>
-                        <div><button class="btn btn-primary invest-btn" data-crypto="BTC">Invest</button></div>
+                        <div>$42.8B</div>
+                        <div><button class="btn btn-primary btn-small invest-btn" data-crypto="BTC">Invest</button></div>
                     </div>
                     
                     <div class="table-row">
                         <div class="crypto-info">
                             <div class="crypto-icon" style="background-color: #627eea;">E</div>
-                            <div>
+                            <div class="crypto-name-symbol">
                                 <div class="crypto-name">Ethereum</div>
                                 <div class="crypto-symbol">ETH</div>
                             </div>
@@ -764,13 +1310,14 @@
                         <div>$3,250.75</div>
                         <div class="positive">+1.8%</div>
                         <div>$390.5B</div>
-                        <div><button class="btn btn-primary invest-btn" data-crypto="ETH">Invest</button></div>
+                        <div>$18.3B</div>
+                        <div><button class="btn btn-primary btn-small invest-btn" data-crypto="ETH">Invest</button></div>
                     </div>
                     
                     <div class="table-row">
                         <div class="crypto-info">
                             <div class="crypto-icon" style="background-color: #00d1b2;">S</div>
-                            <div>
+                            <div class="crypto-name-symbol">
                                 <div class="crypto-name">Solana</div>
                                 <div class="crypto-symbol">SOL</div>
                             </div>
@@ -778,13 +1325,14 @@
                         <div>$142.30</div>
                         <div class="negative">-0.5%</div>
                         <div>$62.8B</div>
-                        <div><button class="btn btn-primary invest-btn" data-crypto="SOL">Invest</button></div>
+                        <div>$3.2B</div>
+                        <div><button class="btn btn-primary btn-small invest-btn" data-crypto="SOL">Invest</button></div>
                     </div>
                     
                     <div class="table-row">
                         <div class="crypto-info">
                             <div class="crypto-icon" style="background-color: #00acff;">C</div>
-                            <div>
+                            <div class="crypto-name-symbol">
                                 <div class="crypto-name">Cardano</div>
                                 <div class="crypto-symbol">ADA</div>
                             </div>
@@ -792,40 +1340,72 @@
                         <div>$0.48</div>
                         <div class="positive">+3.2%</div>
                         <div>$17.2B</div>
-                        <div><button class="btn btn-primary invest-btn" data-crypto="ADA">Invest</button></div>
+                        <div>$680M</div>
+                        <div><button class="btn btn-primary btn-small invest-btn" data-crypto="ADA">Invest</button></div>
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="crypto-info">
+                            <div class="crypto-icon" style="background-color: #f0b90b;">B</div>
+                            <div class="crypto-name-symbol">
+                                <div class="crypto-name">BNB</div>
+                                <div class="crypto-symbol">BNB</div>
+                            </div>
+                        </div>
+                        <div>$580.20</div>
+                        <div class="positive">+0.8%</div>
+                        <div>$89.3B</div>
+                        <div>$1.9B</div>
+                        <div><button class="btn btn-primary btn-small invest-btn" data-crypto="BNB">Invest</button></div>
                     </div>
                 </div>
             </div>
             
-            <!-- Portfolio Page (Hidden by default) -->
+            <!-- Portfolio Page -->
             <div id="portfolio-page" class="page" style="display: none;">
                 <div class="page-title">
-                    <h1>My Portfolio</h1>
-                    <button class="btn btn-secondary" id="add-asset-btn">+ Add Asset</button>
+                    <div>
+                        <h1>My Portfolio</h1>
+                        <div class="page-subtitle">Track and manage your cryptocurrency investments</div>
+                    </div>
+                    <button class="btn btn-secondary" id="add-asset-btn">
+                        <i class="fas fa-plus-circle"></i> Add Asset
+                    </button>
                 </div>
                 
                 <!-- Portfolio Chart -->
                 <div class="portfolio-chart-container">
                     <div class="chart-header">
-                        <h2 class="section-title">Portfolio Performance</h2>
+                        <div>
+                            <h2 class="section-title">Portfolio Performance</h2>
+                            <div class="section-subtitle">Last 30 days performance</div>
+                        </div>
                         <div class="chart-actions">
-                            <button class="btn btn-outline active">1D</button>
-                            <button class="btn btn-outline">1W</button>
-                            <button class="btn btn-outline">1M</button>
-                            <button class="btn btn-outline">1Y</button>
-                            <button class="btn btn-outline">All</button>
+                            <button class="btn btn-outline active" data-period="1D">1D</button>
+                            <button class="btn btn-outline" data-period="1W">1W</button>
+                            <button class="btn btn-outline" data-period="1M">1M</button>
+                            <button class="btn btn-outline" data-period="3M">3M</button>
+                            <button class="btn btn-outline" data-period="1Y">1Y</button>
+                            <button class="btn btn-outline" data-period="ALL">All</button>
                         </div>
                     </div>
                     <div class="chart-placeholder">
-                        <div>Portfolio Performance Chart<br><small>Interactive chart would appear here with real data</small></div>
+                        <i class="fas fa-chart-area"></i>
+                        <div>Portfolio Performance Chart</div>
+                        <small style="margin-top: 10px;">Interactive chart showing your portfolio growth over time</small>
                     </div>
                 </div>
                 
                 <!-- Asset Distribution -->
                 <div class="section-header">
-                    <h2 class="section-title">Asset Distribution</h2>
                     <div>
-                        <button class="btn btn-outline" id="rebalance-portfolio">Rebalance Portfolio</button>
+                        <h2 class="section-title">Asset Distribution</h2>
+                        <div class="section-subtitle">Your current cryptocurrency holdings</div>
+                    </div>
+                    <div>
+                        <button class="btn btn-outline" id="rebalance-portfolio">
+                            <i class="fas fa-balance-scale"></i> Rebalance Portfolio
+                        </button>
                     </div>
                 </div>
                 
@@ -844,8 +1424,12 @@
                         <div class="asset-amount">0.42 BTC</div>
                         <div class="asset-value">$26,636.61</div>
                         <div class="asset-actions">
-                            <button class="btn btn-outline">Sell</button>
-                            <button class="btn btn-primary">Buy More</button>
+                            <button class="btn btn-outline sell-asset-btn" data-crypto="BTC">
+                                <i class="fas fa-arrow-down"></i> Sell
+                            </button>
+                            <button class="btn btn-primary buy-more-btn" data-crypto="BTC">
+                                <i class="fas fa-arrow-up"></i> Buy More
+                            </button>
                         </div>
                     </div>
                     
@@ -863,8 +1447,12 @@
                         <div class="asset-amount">3.8 ETH</div>
                         <div class="asset-value">$12,352.85</div>
                         <div class="asset-actions">
-                            <button class="btn btn-outline">Sell</button>
-                            <button class="btn btn-primary">Buy More</button>
+                            <button class="btn btn-outline sell-asset-btn" data-crypto="ETH">
+                                <i class="fas fa-arrow-down"></i> Sell
+                            </button>
+                            <button class="btn btn-primary buy-more-btn" data-crypto="ETH">
+                                <i class="fas fa-arrow-up"></i> Buy More
+                            </button>
                         </div>
                     </div>
                     
@@ -882,14 +1470,674 @@
                         <div class="asset-amount">28.5 SOL</div>
                         <div class="asset-value">$4,055.55</div>
                         <div class="asset-actions">
-                            <button class="btn btn-outline">Sell</button>
-                            <button class="btn btn-primary">Buy More</button>
+                            <button class="btn btn-outline sell-asset-btn" data-crypto="SOL">
+                                <i class="fas fa-arrow-down"></i> Sell
+                            </button>
+                            <button class="btn btn-primary buy-more-btn" data-crypto="SOL">
+                                <i class="fas fa-arrow-up"></i> Buy More
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Performance Metrics -->
+                <div class="section-header" style="margin-top: 40px;">
+                    <h2 class="section-title">Performance Metrics</h2>
+                </div>
+                
+                <div class="overview-cards">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Total Return</div>
+                            <div class="card-icon">
+                                <i class="fas fa-chart-bar"></i>
+                            </div>
+                        </div>
+                        <div class="card-value">+24.8%</div>
+                        <div class="card-change positive">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>Since inception</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Best Performer</div>
+                            <div class="card-icon">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                        </div>
+                        <div class="card-value">BTC</div>
+                        <div class="card-change positive">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>+12.4% this month</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Diversification</div>
+                            <div class="card-icon">
+                                <i class="fas fa-layer-group"></i>
+                            </div>
+                        </div>
+                        <div class="card-value">7 Assets</div>
+                        <div class="card-change">
+                            <span>Well diversified</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Monthly Dividend</div>
+                            <div class="card-icon">
+                                <i class="fas fa-hand-holding-usd"></i>
+                            </div>
+                        </div>
+                        <div class="card-value">$128.50</div>
+                        <div class="card-change positive">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>+5.2% from last month</span>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <!-- Other pages would follow similar structure -->
+            <!-- Market Page -->
+            <div id="market-page" class="page" style="display: none;">
+                <div class="page-title">
+                    <div>
+                        <h1>Market</h1>
+                        <div class="page-subtitle">Real-time cryptocurrency prices and trends</div>
+                    </div>
+                    <div>
+                        <button class="btn btn-outline" id="market-watchlist">
+                            <i class="fas fa-star"></i> My Watchlist
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Market Filters -->
+                <div style="display: flex; gap: 15px; margin-bottom: 30px; flex-wrap: wrap;">
+                    <button class="btn btn-outline active">All</button>
+                    <button class="btn btn-outline">Top Gainers</button>
+                    <button class="btn btn-outline">Top Losers</button>
+                    <button class="btn btn-outline">Large Cap</button>
+                    <button class="btn btn-outline">DeFi</button>
+                    <button class="btn btn-outline">NFT</button>
+                    <button class="btn btn-outline">Web3</button>
+                </div>
+                
+                <!-- Full Market Table -->
+                <div class="market-table">
+                    <div class="table-header">
+                        <div>Asset</div>
+                        <div>Price</div>
+                        <div>24h Change</div>
+                        <div>7d Change</div>
+                        <div>Market Cap</div>
+                        <div>Action</div>
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="crypto-info">
+                            <div class="crypto-icon" style="background-color: #f7931a;">B</div>
+                            <div class="crypto-name-symbol">
+                                <div class="crypto-name">Bitcoin</div>
+                                <div class="crypto-symbol">BTC</div>
+                            </div>
+                            <div style="margin-left: auto;">
+                                <i class="far fa-star" style="cursor: pointer; color: var(--gray);" data-crypto="BTC"></i>
+                            </div>
+                        </div>
+                        <div>$63,420.50</div>
+                        <div class="positive">+2.4%</div>
+                        <div class="positive">+5.2%</div>
+                        <div>$1.25T</div>
+                        <div><button class="btn btn-primary btn-small invest-btn" data-crypto="BTC">Trade</button></div>
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="crypto-info">
+                            <div class="crypto-icon" style="background-color: #627eea;">E</div>
+                            <div class="crypto-name-symbol">
+                                <div class="crypto-name">Ethereum</div>
+                                <div class="crypto-symbol">ETH</div>
+                            </div>
+                            <div style="margin-left: auto;">
+                                <i class="fas fa-star" style="cursor: pointer; color: var(--warning);" data-crypto="ETH"></i>
+                            </div>
+                        </div>
+                        <div>$3,250.75</div>
+                        <div class="positive">+1.8%</div>
+                        <div class="positive">+3.7%</div>
+                        <div>$390.5B</div>
+                        <div><button class="btn btn-primary btn-small invest-btn" data-crypto="ETH">Trade</button></div>
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="crypto-info">
+                            <div class="crypto-icon" style="background-color: #00d1b2;">S</div>
+                            <div class="crypto-name-symbol">
+                                <div class="crypto-name">Solana</div>
+                                <div class="crypto-symbol">SOL</div>
+                            </div>
+                            <div style="margin-left: auto;">
+                                <i class="fas fa-star" style="cursor: pointer; color: var(--warning);" data-crypto="SOL"></i>
+                            </div>
+                        </div>
+                        <div>$142.30</div>
+                        <div class="negative">-0.5%</div>
+                        <div class="positive">+8.2%</div>
+                        <div>$62.8B</div>
+                        <div><button class="btn btn-primary btn-small invest-btn" data-crypto="SOL">Trade</button></div>
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="crypto-info">
+                            <div class="crypto-icon" style="background-color: #00acff;">C</div>
+                            <div class="crypto-name-symbol">
+                                <div class="crypto-name">Cardano</div>
+                                <div class="crypto-symbol">ADA</div>
+                            </div>
+                            <div style="margin-left: auto;">
+                                <i class="far fa-star" style="cursor: pointer; color: var(--gray);" data-crypto="ADA"></i>
+                            </div>
+                        </div>
+                        <div>$0.48</div>
+                        <div class="positive">+3.2%</div>
+                        <div class="negative">-1.5%</div>
+                        <div>$17.2B</div>
+                        <div><button class="btn btn-primary btn-small invest-btn" data-crypto="ADA">Trade</button></div>
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="crypto-info">
+                            <div class="crypto-icon" style="background-color: #f0b90b;">B</div>
+                            <div class="crypto-name-symbol">
+                                <div class="crypto-name">BNB</div>
+                                <div class="crypto-symbol">BNB</div>
+                            </div>
+                            <div style="margin-left: auto;">
+                                <i class="far fa-star" style="cursor: pointer; color: var(--gray);" data-crypto="BNB"></i>
+                            </div>
+                        </div>
+                        <div>$580.20</div>
+                        <div class="positive">+0.8%</div>
+                        <div class="positive">+2.3%</div>
+                        <div>$89.3B</div>
+                        <div><button class="btn btn-primary btn-small invest-btn" data-crypto="BNB">Trade</button></div>
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="crypto-info">
+                            <div class="crypto-icon" style="background-color: #5d6d7e;">X</div>
+                            <div class="crypto-name-symbol">
+                                <div class="crypto-name">XRP</div>
+                                <div class="crypto-symbol">XRP</div>
+                            </div>
+                            <div style="margin-left: auto;">
+                                <i class="far fa-star" style="cursor: pointer; color: var(--gray);" data-crypto="XRP"></i>
+                            </div>
+                        </div>
+                        <div>$0.52</div>
+                        <div class="positive">+1.2%</div>
+                        <div class="negative">-0.8%</div>
+                        <div>$28.4B</div>
+                        <div><button class="btn btn-primary btn-small invest-btn" data-crypto="XRP">Trade</button></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Invest Page -->
+            <div id="invest-page" class="page" style="display: none;">
+                <div class="page-title">
+                    <div>
+                        <h1>Invest</h1>
+                        <div class="page-subtitle">Choose from our curated investment options</div>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary" id="custom-invest-btn">
+                            <i class="fas fa-sliders-h"></i> Custom Investment
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Investment Options -->
+                <div class="investment-options">
+                    <div class="investment-card">
+                        <div class="investment-header">
+                            <div class="investment-title">Starter Portfolio</div>
+                            <div class="investment-badge">Low Risk</div>
+                        </div>
+                        <div class="investment-details">
+                            <p>A balanced portfolio with 60% Bitcoin, 30% Ethereum, and 10% stablecoins. Ideal for beginners with a low-risk tolerance.</p>
+                            <div class="investment-stats">
+                                <div class="stat-item">
+                                    <div class="stat-value">8.2%</div>
+                                    <div class="stat-label">Avg. Return</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value">Low</div>
+                                    <div class="stat-label">Risk Level</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value">$100</div>
+                                    <div class="stat-label">Min. Invest</div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary invest-option-btn" data-plan="starter">Invest Now</button>
+                    </div>
+                    
+                    <div class="investment-card featured">
+                        <div class="investment-header">
+                            <div class="investment-title">Growth Portfolio</div>
+                            <div class="investment-badge">Medium Risk</div>
+                        </div>
+                        <div class="investment-details">
+                            <p>Diversified across 8 cryptocurrencies with a focus on growth. Includes Bitcoin, Ethereum, Solana, Cardano, and emerging tokens.</p>
+                            <div class="investment-stats">
+                                <div class="stat-item">
+                                    <div class="stat-value">15.4%</div>
+                                    <div class="stat-label">Avg. Return</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value">Medium</div>
+                                    <div class="stat-label">Risk Level</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value">$500</div>
+                                    <div class="stat-label">Min. Invest</div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-secondary invest-option-btn" data-plan="growth">Invest Now</button>
+                    </div>
+                    
+                    <div class="investment-card">
+                        <div class="investment-header">
+                            <div class="investment-title">Aggressive Portfolio</div>
+                            <div class="investment-badge">High Risk</div>
+                        </div>
+                        <div class="investment-details">
+                            <p>High-risk, high-reward portfolio focusing on emerging cryptocurrencies and DeFi tokens. For experienced investors only.</p>
+                            <div class="investment-stats">
+                                <div class="stat-item">
+                                    <div class="stat-value">24.8%</div>
+                                    <div class="stat-label">Avg. Return</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value">High</div>
+                                    <div class="stat-label">Risk Level</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value">$1,000</div>
+                                    <div class="stat-label">Min. Invest</div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary invest-option-btn" data-plan="aggressive">Invest Now</button>
+                    </div>
+                </div>
+                
+                <!-- Staking Options -->
+                <div class="section-header" style="margin-top: 40px;">
+                    <h2 class="section-title">Staking Opportunities</h2>
+                    <div class="section-subtitle">Earn passive income by staking your cryptocurrencies</div>
+                </div>
+                
+                <div class="market-table">
+                    <div class="table-header">
+                        <div>Asset</div>
+                        <div>APY</div>
+                        <div>Minimum</div>
+                        <div>Lock Period</div>
+                        <div>Your Stake</div>
+                        <div>Action</div>
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="crypto-info">
+                            <div class="crypto-icon" style="background-color: #627eea;">E</div>
+                            <div class="crypto-name-symbol">
+                                <div class="crypto-name">Ethereum</div>
+                                <div class="crypto-symbol">ETH</div>
+                            </div>
+                        </div>
+                        <div class="positive">4.8%</div>
+                        <div>0.1 ETH</div>
+                        <div>30 days</div>
+                        <div>0 ETH</div>
+                        <div><button class="btn btn-primary btn-small stake-btn" data-crypto="ETH">Stake</button></div>
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="crypto-info">
+                            <div class="crypto-icon" style="background-color: #00d1b2;">S</div>
+                            <div class="crypto-name-symbol">
+                                <div class="crypto-name">Solana</div>
+                                <div class="crypto-symbol">SOL</div>
+                            </div>
+                        </div>
+                        <div class="positive">6.2%</div>
+                        <div>1 SOL</div>
+                        <div>7 days</div>
+                        <div>0 SOL</div>
+                        <div><button class="btn btn-primary btn-small stake-btn" data-crypto="SOL">Stake</button></div>
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="crypto-info">
+                            <div class="crypto-icon" style="background-color: #00acff;">C</div>
+                            <div class="crypto-name-symbol">
+                                <div class="crypto-name">Cardano</div>
+                                <div class="crypto-symbol">ADA</div>
+                            </div>
+                        </div>
+                        <div class="positive">3.5%</div>
+                        <div>100 ADA</div>
+                        <div>14 days</div>
+                        <div>0 ADA</div>
+                        <div><button class="btn btn-primary btn-small stake-btn" data-crypto="ADA">Stake</button></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Security Page -->
+            <div id="security-page" class="page" style="display: none;">
+                <div class="page-title">
+                    <div>
+                        <h1>Security</h1>
+                        <div class="page-subtitle">Manage your account security and privacy settings</div>
+                    </div>
+                    <div class="security-status" style="background-color: rgba(0, 200, 83, 0.1); padding: 10px 20px; border-radius: var(--border-radius);">
+                        <div class="status-dot active"></div>
+                        <span>All security features are active</span>
+                    </div>
+                </div>
+                
+                <div class="security-settings">
+                    <div class="security-card">
+                        <div class="security-header">
+                            <div class="security-icon">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <div>
+                                <div class="security-title">Two-Factor Authentication</div>
+                                <div class="security-status">
+                                    <div class="status-dot active"></div>
+                                    <span>Active</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="security-description">
+                            Two-factor authentication adds an extra layer of security to your account. You'll need to enter a code from your authenticator app when signing in.
+                        </div>
+                        <div class="security-actions">
+                            <button class="btn btn-outline" id="manage-2fa">Manage 2FA</button>
+                            <button class="btn btn-primary" id="view-backup-codes">View Backup Codes</button>
+                        </div>
+                    </div>
+                    
+                    <div class="security-card">
+                        <div class="security-header">
+                            <div class="security-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div>
+                                <div class="security-title">Withdrawal Whitelist</div>
+                                <div class="security-status">
+                                    <div class="status-dot active"></div>
+                                    <span>3 addresses whitelisted</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="security-description">
+                            Only allow withdrawals to pre-approved cryptocurrency addresses. This prevents unauthorized transfers even if your account is compromised.
+                        </div>
+                        <div class="security-actions">
+                            <button class="btn btn-outline" id="view-whitelist">View Whitelist</button>
+                            <button class="btn btn-primary" id="add-whitelist">Add Address</button>
+                        </div>
+                    </div>
+                    
+                    <div class="security-card">
+                        <div class="security-header">
+                            <div class="security-icon">
+                                <i class="fas fa-bell"></i>
+                            </div>
+                            <div>
+                                <div class="security-title">Security Alerts</div>
+                                <div class="security-status">
+                                    <div class="status-dot active"></div>
+                                    <span>All alerts enabled</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="security-description">
+                            Receive instant notifications for suspicious activities, logins from new devices, large withdrawals, and other security-related events.
+                        </div>
+                        <div class="security-actions">
+                            <button class="btn btn-outline" id="manage-alerts">Manage Alerts</button>
+                            <button class="btn btn-primary" id="test-alert">Test Alert</button>
+                        </div>
+                    </div>
+                    
+                    <div class="security-card">
+                        <div class="security-header">
+                            <div class="security-icon">
+                                <i class="fas fa-history"></i>
+                            </div>
+                            <div>
+                                <div class="security-title">Login History</div>
+                                <div class="security-status">
+                                    <div class="status-dot"></div>
+                                    <span>Last login: Today, 10:24 AM</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="security-description">
+                            Review your recent account activity. Check for any unfamiliar logins or suspicious activities. You can log out of all other sessions from here.
+                        </div>
+                        <div class="security-actions">
+                            <button class="btn btn-outline" id="view-logins">View History</button>
+                            <button class="btn btn-danger" id="logout-all">Logout All Devices</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Security Tips -->
+                <div class="section-header" style="margin-top: 40px;">
+                    <h2 class="section-title">Security Tips</h2>
+                </div>
+                
+                <div class="overview-cards">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Use Strong Passwords</div>
+                            <div class="card-icon">
+                                <i class="fas fa-key"></i>
+                            </div>
+                        </div>
+                        <div style="color: var(--gray); margin-top: 15px;">
+                            Create unique, complex passwords for your CryptoVest account. Consider using a password manager.
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Enable 2FA</div>
+                            <div class="card-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                        </div>
+                        <div style="color: var(--gray); margin-top: 15px;">
+                            Two-factor authentication is the most effective way to secure your account against unauthorized access.
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Beware of Phishing</div>
+                            <div class="card-icon">
+                                <i class="fas fa-fish"></i>
+                            </div>
+                        </div>
+                        <div style="color: var(--gray); margin-top: 15px;">
+                            Always verify you're on the official CryptoVest website. Never share your credentials or 2FA codes.
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Regular Audits</div>
+                            <div class="card-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                        </div>
+                        <div style="color: var(--gray); margin-top: 15px;">
+                            Regularly review your account activity and enable withdrawal confirmations for added security.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- History Page -->
+            <div id="history-page" class="page" style="display: none;">
+                <div class="page-title">
+                    <div>
+                        <h1>Transaction History</h1>
+                        <div class="page-subtitle">View all your investment transactions and activities</div>
+                    </div>
+                    <div>
+                        <button class="btn btn-outline" id="export-history">
+                            <i class="fas fa-download"></i> Export History
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- History Filters -->
+                <div style="display: flex; gap: 15px; margin-bottom: 30px; flex-wrap: wrap;">
+                    <button class="btn btn-outline active">All Transactions</button>
+                    <button class="btn btn-outline">Buys</button>
+                    <button class="btn btn-outline">Sells</button>
+                    <button class="btn btn-outline">Deposits</button>
+                    <button class="btn btn-outline">Withdrawals</button>
+                    <button class="btn btn-outline">Dividends</button>
+                    <button class="btn btn-outline">Last 30 Days</button>
+                </div>
+                
+                <!-- Transaction History -->
+                <div class="transaction-history">
+                    <div class="transaction-item">
+                        <div class="transaction-info">
+                            <div class="transaction-icon buy">
+                                <i class="fas fa-arrow-up"></i>
+                            </div>
+                            <div class="transaction-details">
+                                <h4>Buy Bitcoin</h4>
+                                <p>Purchased 0.1 BTC at $62,450.20</p>
+                            </div>
+                        </div>
+                        <div class="transaction-amount">
+                            <div class="amount positive">+0.1 BTC</div>
+                            <div class="date">Today, 10:24 AM</div>
+                        </div>
+                    </div>
+                    
+                    <div class="transaction-item">
+                        <div class="transaction-info">
+                            <div class="transaction-icon deposit">
+                                <i class="fas fa-wallet"></i>
+                            </div>
+                            <div class="transaction-details">
+                                <h4>USD Deposit</h4>
+                                <p>Bank transfer from Chase Bank</p>
+                            </div>
+                        </div>
+                        <div class="transaction-amount">
+                            <div class="amount positive">+$2,500.00</div>
+                            <div class="date">Yesterday, 3:45 PM</div>
+                        </div>
+                    </div>
+                    
+                    <div class="transaction-item">
+                        <div class="transaction-info">
+                            <div class="transaction-icon sell">
+                                <i class="fas fa-arrow-down"></i>
+                            </div>
+                            <div class="transaction-details">
+                                <h4>Sell Ethereum</h4>
+                                <p>Sold 0.5 ETH at $3,220.50</p>
+                            </div>
+                        </div>
+                        <div class="transaction-amount">
+                            <div class="amount negative">-0.5 ETH</div>
+                            <div class="date">Nov 12, 2023, 9:15 AM</div>
+                        </div>
+                    </div>
+                    
+                    <div class="transaction-item">
+                        <div class="transaction-info">
+                            <div class="transaction-icon buy">
+                                <i class="fas fa-arrow-up"></i>
+                            </div>
+                            <div class="transaction-details">
+                                <h4>Buy Solana</h4>
+                                <p>Purchased 10 SOL at $138.75</p>
+                            </div>
+                        </div>
+                        <div class="transaction-amount">
+                            <div class="amount positive">+10 SOL</div>
+                            <div class="date">Nov 10, 2023, 2:30 PM</div>
+                        </div>
+                    </div>
+                    
+                    <div class="transaction-item">
+                        <div class="transaction-info">
+                            <div class="transaction-icon deposit">
+                                <i class="fas fa-gift"></i>
+                            </div>
+                            <div class="transaction-details">
+                                <h4>Staking Rewards</h4>
+                                <p>Ethereum staking rewards distributed</p>
+                            </div>
+                        </div>
+                        <div class="transaction-amount">
+                            <div class="amount positive">+0.02 ETH</div>
+                            <div class="date">Nov 5, 2023, 8:00 AM</div>
+                        </div>
+                    </div>
+                    
+                    <div class="transaction-item">
+                        <div class="transaction-info">
+                            <div class="transaction-icon sell">
+                                <i class="fas fa-arrow-down"></i>
+                            </div>
+                            <div class="transaction-details">
+                                <h4>Sell Cardano</h4>
+                                <p>Sold 500 ADA at $0.46</p>
+                            </div>
+                        </div>
+                        <div class="transaction-amount">
+                            <div class="amount negative">-500 ADA</div>
+                            <div class="date">Oct 28, 2023, 11:20 AM</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pagination -->
+                <div style="display: flex; justify-content: center; gap: 10px; margin-top: 40px;">
+                    <button class="btn btn-outline btn-small" disabled>Previous</button>
+                    <button class="btn btn-outline btn-small active">1</button>
+                    <button class="btn btn-outline btn-small">2</button>
+                    <button class="btn btn-outline btn-small">3</button>
+                    <span style="padding: 8px 16px; color: var(--gray);">...</span>
+                    <button class="btn btn-outline btn-small">8</button>
+                    <button class="btn btn-outline btn-small">Next</button>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -903,23 +2151,23 @@
             
             <div class="crypto-selector">
                 <div class="crypto-option active" data-crypto="BTC">
-                    <div>BTC</div>
-                    <div style="font-size: 12px; color: var(--gray);">Bitcoin</div>
+                    <div style="font-size: 20px; font-weight: 700;">BTC</div>
+                    <div style="font-size: 14px; color: var(--gray); margin-top: 5px;">Bitcoin</div>
                 </div>
                 <div class="crypto-option" data-crypto="ETH">
-                    <div>ETH</div>
-                    <div style="font-size: 12px; color: var(--gray);">Ethereum</div>
+                    <div style="font-size: 20px; font-weight: 700;">ETH</div>
+                    <div style="font-size: 14px; color: var(--gray); margin-top: 5px;">Ethereum</div>
                 </div>
                 <div class="crypto-option" data-crypto="SOL">
-                    <div>SOL</div>
-                    <div style="font-size: 12px; color: var(--gray);">Solana</div>
+                    <div style="font-size: 20px; font-weight: 700;">SOL</div>
+                    <div style="font-size: 14px; color: var(--gray); margin-top: 5px;">Solana</div>
                 </div>
             </div>
             
             <div class="form-group">
                 <label class="form-label" for="investment-amount">Investment Amount (USD)</label>
-                <input type="number" id="investment-amount" class="form-input" placeholder="0.00" min="10" step="0.01">
-                <div style="font-size: 14px; color: var(--gray); margin-top: 5px;">Minimum investment: $10.00</div>
+                <input type="number" id="investment-amount" class="form-input" placeholder="0.00" min="10" step="0.01" value="1000">
+                <div class="form-hint">Minimum investment: $10.00 | Available balance: $5,250.00</div>
             </div>
             
             <div class="form-group">
@@ -935,9 +2183,9 @@
             <div class="form-group">
                 <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
                     <div class="form-label">You will receive:</div>
-                    <div id="crypto-amount" style="font-weight: 600; font-size: 18px;">0.0000 BTC</div>
+                    <div id="crypto-amount" style="font-weight: 700; font-size: 22px;">0.0158 BTC</div>
                 </div>
-                <div style="display: flex; justify-content: space-between; font-size: 14px; color: var(--gray);">
+                <div style="display: flex; justify-content: space-between; font-size: 15px; color: var(--gray);">
                     <div>Current price:</div>
                     <div id="crypto-price">$63,420.50</div>
                 </div>
@@ -950,188 +2198,512 @@
         </div>
     </div>
 
+    <!-- Withdrawal Modal -->
+    <div class="modal" id="withdrawal-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Withdraw Funds</h2>
+                <div class="close-modal close-withdrawal-modal">&times;</div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="withdrawal-amount">Withdrawal Amount (USD)</label>
+                <input type="number" id="withdrawal-amount" class="form-input" placeholder="0.00" min="10" step="0.01" value="500">
+                <div class="form-hint">Minimum withdrawal: $10.00 | Available balance: $5,250.00</div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="withdrawal-method">Withdrawal Method</label>
+                <select id="withdrawal-method" class="form-input">
+                    <option value="bank">Bank Transfer (2-3 business days)</option>
+                    <option value="crypto">Cryptocurrency (Instant)</option>
+                    <option value="paypal">PayPal (Instant)</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="withdrawal-address">Destination Address</label>
+                <input type="text" id="withdrawal-address" class="form-input" placeholder="Enter your wallet or bank account details">
+                <div class="form-hint">For cryptocurrency withdrawals, enter your wallet address</div>
+            </div>
+            
+            <div class="form-group">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                    <div class="form-label">Withdrawal fee:</div>
+                    <div style="font-weight: 600; font-size: 18px;">$5.00</div>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 15px; color: var(--gray);">
+                    <div>You will receive:</div>
+                    <div id="net-amount">$495.00</div>
+                </div>
+            </div>
+            
+            <div class="form-actions">
+                <button class="btn btn-outline close-withdrawal-modal">Cancel</button>
+                <button class="btn btn-primary" id="confirm-withdrawal">Confirm Withdrawal</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Panel -->
+    <div class="modal" id="notification-panel">
+        <div class="modal-content" style="max-width: 400px;">
+            <div class="modal-header">
+                <h2 class="modal-title">Notifications</h2>
+                <div class="close-modal close-notification-panel">&times;</div>
+            </div>
+            
+            <div style="max-height: 400px; overflow-y: auto;">
+                <div class="transaction-item" style="margin-bottom: 15px;">
+                    <div class="transaction-info">
+                        <div class="transaction-icon deposit" style="width: 40px; height: 40px; font-size: 18px;">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="transaction-details">
+                            <h4 style="font-size: 16px;">Investment Successful</h4>
+                            <p>Your Bitcoin purchase of 0.1 BTC is complete</p>
+                            <div style="font-size: 12px; color: var(--gray); margin-top: 3px;">10 minutes ago</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="transaction-item" style="margin-bottom: 15px;">
+                    <div class="transaction-info">
+                        <div class="transaction-icon buy" style="width: 40px; height: 40px; font-size: 18px;">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="transaction-details">
+                            <h4 style="font-size: 16px;">Security Alert</h4>
+                            <p>New login from Chrome on Windows</p>
+                            <div style="font-size: 12px; color: var(--gray); margin-top: 3px;">2 hours ago</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="transaction-item" style="margin-bottom: 15px;">
+                    <div class="transaction-info">
+                        <div class="transaction-icon deposit" style="width: 40px; height: 40px; font-size: 18px;">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <div class="transaction-details">
+                            <h4 style="font-size: 16px;">Staking Rewards</h4>
+                            <p>You received 0.02 ETH staking rewards</p>
+                            <div style="font-size: 12px; color: var(--gray); margin-top: 3px;">1 day ago</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="transaction-item" style="margin-bottom: 15px;">
+                    <div class="transaction-info">
+                        <div class="transaction-icon buy" style="width: 40px; height: 40px; font-size: 18px;">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="transaction-details">
+                            <h4 style="font-size: 16px;">Portfolio Update</h4>
+                            <p>Your portfolio is up 3.2% today</p>
+                            <div style="font-size: 12px; color: var(--gray); margin-top: 3px;">2 days ago</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-actions" style="margin-top: 20px;">
+                <button class="btn btn-outline close-notification-panel">Close</button>
+                <button class="btn btn-primary" id="mark-all-read">Mark All as Read</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>CryptoVest</h3>
-                    <p>Your trusted platform for cryptocurrency investment and portfolio management. Secure, compliant, and user-friendly.</p>
-                    <div style="margin-top: 20px;">
-                        <button class="btn btn-primary">Get Started</button>
+                    <p style="color: var(--gray); margin-bottom: 20px;">Your trusted platform for secure cryptocurrency investment and portfolio management.</p>
+                    <div style="display: flex; gap: 15px; font-size: 20px;">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
                 
                 <div class="footer-section">
                     <h3>Products</h3>
                     <ul class="footer-links">
-                        <li><a href="#">Investment Plans</a></li>
-                        <li><a href="#">Portfolio Management</a></li>
-                        <li><a href="#">Crypto Staking</a></li>
-                        <li><a href="#">Trading Tools</a></li>
-                        <li><a href="#">Market Analysis</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Investment Plans</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Portfolio Management</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Crypto Staking</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Trading Tools</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Market Analysis</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-section">
                     <h3>Security</h3>
                     <ul class="footer-links">
-                        <li><a href="#">Two-Factor Authentication</a></li>
-                        <li><a href="#">Cold Storage</a></li>
-                        <li><a href="#">Insurance Coverage</a></li>
-                        <li><a href="#">Regulatory Compliance</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Two-Factor Authentication</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Cold Storage</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Insurance Coverage</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Regulatory Compliance</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-section">
                     <h3>Contact Us</h3>
                     <ul class="footer-links">
-                        <li><a href="#">support@cryptovest.com</a></li>
-                        <li><a href="#">+1 (555) 123-4567</a></li>
-                        <li><a href="#">Live Chat</a></li>
-                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#"><i class="fas fa-envelope"></i> support@cryptovest.com</a></li>
+                        <li><a href="#"><i class="fas fa-phone"></i> +1 (555) 123-4567</a></li>
+                        <li><a href="#"><i class="fas fa-comment-dots"></i> Live Chat</a></li>
+                        <li><a href="#"><i class="fas fa-question-circle"></i> Help Center</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> 123 Crypto Street, NY 10001</a></li>
                     </ul>
                 </div>
             </div>
             
             <div class="copyright">
-                &copy; 2023 CryptoVest. All rights reserved. Cryptocurrency investments are subject to market risk.
+                &copy; 2023 CryptoVest. All rights reserved. Cryptocurrency investments are subject to market risk. Please read our Risk Disclosure before investing.
             </div>
         </div>
     </footer>
 
     <script>
         // DOM Elements
-        const dashboardPage = document.getElementById('dashboard-page');
-        const portfolioPage = document.getElementById('portfolio-page');
+        const pages = {
+            dashboard: document.getElementById('dashboard-page'),
+            portfolio: document.getElementById('portfolio-page'),
+            market: document.getElementById('market-page'),
+            invest: document.getElementById('invest-page'),
+            security: document.getElementById('security-page'),
+            history: document.getElementById('history-page')
+        };
+        
+        const navLinks = {
+            dashboard: document.getElementById('nav-dashboard'),
+            portfolio: document.getElementById('nav-portfolio'),
+            market: document.getElementById('nav-market'),
+            invest: document.getElementById('nav-invest'),
+            security: document.getElementById('nav-security'),
+            history: document.getElementById('nav-history')
+        };
+        
         const investmentModal = document.getElementById('investment-modal');
-        const closeModalBtn = document.getElementById('close-modal');
-        const cancelInvestmentBtn = document.getElementById('cancel-investment');
-        const investButtons = document.querySelectorAll('.invest-btn');
-        const addAssetBtn = document.getElementById('add-asset-btn');
-        const cryptoOptions = document.querySelectorAll('.crypto-option');
-        const investmentAmount = document.getElementById('investment-amount');
-        const cryptoAmount = document.getElementById('crypto-amount');
-        const cryptoPrice = document.getElementById('crypto-price');
-        const modalCryptoName = document.getElementById('modal-crypto-name');
-        const refreshMarketBtn = document.getElementById('refresh-market');
-        const rebalancePortfolioBtn = document.getElementById('rebalance-portfolio');
-        const confirmInvestmentBtn = document.getElementById('confirm-investment');
-        const navLinks = document.querySelectorAll('nav a');
-        
-        // Current Date Display
+        const withdrawalModal = document.getElementById('withdrawal-modal');
+        const notificationPanel = document.getElementById('notification-panel');
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mainNav = document.getElementById('main-nav');
         const currentDate = document.getElementById('current-date');
-        const now = new Date();
-        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        currentDate.textContent = now.toLocaleDateString('en-US', options);
+        const notificationBtn = document.getElementById('notification-btn');
+        const notificationBadge = document.querySelector('.notification-badge');
         
-        // Navigation
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                
-                // Update active nav link
-                navLinks.forEach(nav => nav.classList.remove('active'));
-                link.classList.add('active');
-                
-                // Show corresponding page
-                const pageId = link.id.replace('nav-', '') + '-page';
-                const pages = document.querySelectorAll('.page');
-                pages.forEach(page => {
-                    page.style.display = 'none';
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set current date
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            currentDate.textContent = now.toLocaleDateString('en-US', options);
+            
+            // Set up event listeners
+            setupEventListeners();
+            
+            // Show welcome notification
+            setTimeout(() => {
+                showNotification('Welcome to CryptoVest! Your dashboard is ready.', 'success');
+            }, 1000);
+            
+            // Start price simulation
+            startPriceSimulation();
+        });
+        
+        // Setup all event listeners
+        function setupEventListeners() {
+            // Navigation
+            Object.keys(navLinks).forEach(key => {
+                navLinks[key].addEventListener('click', (e) => {
+                    e.preventDefault();
+                    switchPage(key);
                 });
-                
-                if (document.getElementById(pageId)) {
-                    document.getElementById(pageId).style.display = 'block';
-                } else {
-                    // Default to dashboard if page doesn't exist
-                    dashboardPage.style.display = 'block';
-                    document.getElementById('nav-dashboard').classList.add('active');
+            });
+            
+            // Mobile menu
+            mobileMenuBtn.addEventListener('click', () => {
+                mainNav.classList.toggle('active');
+                mobileMenuBtn.innerHTML = mainNav.classList.contains('active') 
+                    ? '<i class="fas fa-times"></i>' 
+                    : '<i class="fas fa-bars"></i>';
+            });
+            
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!mainNav.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                    mainNav.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
                 }
             });
-        });
-        
-        // Investment Modal
-        investButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const crypto = button.getAttribute('data-crypto');
-                openInvestmentModal(crypto);
+            
+            // Investment buttons
+            document.querySelectorAll('.invest-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const crypto = btn.getAttribute('data-crypto');
+                    openInvestmentModal(crypto);
+                });
             });
-        });
+            
+            document.querySelectorAll('.invest-option-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const plan = btn.getAttribute('data-plan');
+                    openInvestmentModal('BTC', plan);
+                });
+            });
+            
+            document.querySelectorAll('.stake-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const crypto = btn.getAttribute('data-crypto');
+                    showNotification(`Staking modal for ${crypto} would open here`, 'info');
+                });
+            });
+            
+            document.querySelectorAll('.buy-more-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const crypto = btn.getAttribute('data-crypto');
+                    openInvestmentModal(crypto);
+                });
+            });
+            
+            document.querySelectorAll('.sell-asset-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const crypto = btn.getAttribute('data-crypto');
+                    showNotification(`Sell ${crypto} modal would open here`, 'info');
+                });
+            });
+            
+            // Quick action buttons
+            document.getElementById('quick-invest-btn').addEventListener('click', () => openInvestmentModal('BTC'));
+            document.getElementById('quick-withdraw-btn').addEventListener('click', openWithdrawalModal);
+            document.getElementById('quick-transfer-btn').addEventListener('click', () => showNotification('Transfer modal would open here', 'info'));
+            document.getElementById('quick-report-btn').addEventListener('click', () => showNotification('Report generation started. Check your email shortly.', 'success'));
+            
+            document.getElementById('add-asset-btn').addEventListener('click', () => openInvestmentModal('BTC'));
+            document.getElementById('custom-invest-btn').addEventListener('click', () => openInvestmentModal('BTC', 'custom'));
+            document.getElementById('refresh-market').addEventListener('click', refreshMarketData);
+            document.getElementById('rebalance-portfolio').addEventListener('click', rebalancePortfolio);
+            document.getElementById('export-history').addEventListener('click', exportHistory);
+            document.getElementById('market-watchlist').addEventListener('click', () => switchPage('market'));
+            
+            // Security buttons
+            document.getElementById('manage-2fa').addEventListener('click', () => showNotification('2FA management modal would open here', 'info'));
+            document.getElementById('view-backup-codes').addEventListener('click', () => showNotification('Backup codes modal would open here', 'info'));
+            document.getElementById('view-whitelist').addEventListener('click', () => showNotification('Whitelist modal would open here', 'info'));
+            document.getElementById('add-whitelist').addEventListener('click', () => showNotification('Add address modal would open here', 'info'));
+            document.getElementById('manage-alerts').addEventListener('click', () => showNotification('Alerts management modal would open here', 'info'));
+            document.getElementById('test-alert').addEventListener('click', () => showNotification('Test alert sent to your email', 'success'));
+            document.getElementById('view-logins').addEventListener('click', () => showNotification('Login history modal would open here', 'info'));
+            document.getElementById('logout-all').addEventListener('click', logoutAllDevices);
+            
+            // Chart period buttons
+            document.querySelectorAll('.chart-actions .btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.chart-actions .btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    const period = this.getAttribute('data-period');
+                    showNotification(`Chart updated to show ${period} data`, 'info');
+                });
+            });
+            
+            // Market filters
+            document.querySelectorAll('#market-page .btn-outline').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (this.textContent !== 'My Watchlist') {
+                        document.querySelectorAll('#market-page .btn-outline').forEach(b => {
+                            if (b.textContent !== 'My Watchlist') b.classList.remove('active');
+                        });
+                        this.classList.add('active');
+                        showNotification(`Filtered by: ${this.textContent}`, 'info');
+                    }
+                });
+            });
+            
+            // History filters
+            document.querySelectorAll('#history-page .btn-outline').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (!this.id) {
+                        document.querySelectorAll('#history-page .btn-outline').forEach(b => {
+                            if (!b.id) b.classList.remove('active');
+                        });
+                        this.classList.add('active');
+                        showNotification(`Filtered: ${this.textContent}`, 'info');
+                    }
+                });
+            });
+            
+            // Star ratings in market
+            document.querySelectorAll('.fa-star').forEach(star => {
+                star.addEventListener('click', function() {
+                    if (this.classList.contains('far')) {
+                        this.classList.remove('far');
+                        this.classList.add('fas');
+                        this.style.color = 'var(--warning)';
+                        showNotification('Added to watchlist', 'success');
+                    } else {
+                        this.classList.remove('fas');
+                        this.classList.add('far');
+                        this.style.color = 'var(--gray)';
+                        showNotification('Removed from watchlist', 'info');
+                    }
+                });
+            });
+            
+            // Notification panel
+            notificationBtn.addEventListener('click', openNotificationPanel);
+            
+            // Modal close buttons
+            document.getElementById('close-modal').addEventListener('click', closeInvestmentModal);
+            document.getElementById('cancel-investment').addEventListener('click', closeInvestmentModal);
+            
+            document.querySelectorAll('.close-withdrawal-modal').forEach(btn => {
+                btn.addEventListener('click', closeWithdrawalModal);
+            });
+            
+            document.querySelectorAll('.close-notification-panel').forEach(btn => {
+                btn.addEventListener('click', closeNotificationPanel);
+            });
+            
+            // Confirm buttons
+            document.getElementById('confirm-investment').addEventListener('click', confirmInvestment);
+            document.getElementById('confirm-withdrawal').addEventListener('click', confirmWithdrawal);
+            document.getElementById('mark-all-read').addEventListener('click', markAllNotificationsAsRead);
+            
+            // Investment amount calculation
+            document.getElementById('investment-amount').addEventListener('input', updateCryptoAmount);
+            document.getElementById('withdrawal-amount').addEventListener('input', updateNetAmount);
+            
+            // Crypto selector
+            document.querySelectorAll('.crypto-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.crypto-option').forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+                    const crypto = this.getAttribute('data-crypto');
+                    updateCryptoAmount();
+                    
+                    // Update modal title
+                    const cryptoNames = {
+                        'BTC': 'Bitcoin',
+                        'ETH': 'Ethereum',
+                        'SOL': 'Solana'
+                    };
+                    document.getElementById('modal-crypto-name').textContent = cryptoNames[crypto];
+                });
+            });
+            
+            // Close modals when clicking outside
+            window.addEventListener('click', (e) => {
+                if (e.target === investmentModal) closeInvestmentModal();
+                if (e.target === withdrawalModal) closeWithdrawalModal();
+                if (e.target === notificationPanel) closeNotificationPanel();
+            });
+        }
         
-        addAssetBtn.addEventListener('click', () => {
-            openInvestmentModal('BTC');
-        });
+        // Page switching
+        function switchPage(page) {
+            // Hide all pages
+            Object.values(pages).forEach(p => p.style.display = 'none');
+            
+            // Show selected page
+            pages[page].style.display = 'block';
+            
+            // Update active nav link
+            Object.values(navLinks).forEach(link => link.classList.remove('active'));
+            navLinks[page].classList.add('active');
+            
+            // Close mobile menu
+            mainNav.classList.remove('active');
+            mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            
+            // Show notification for page change
+            const pageNames = {
+                dashboard: 'Dashboard',
+                portfolio: 'Portfolio',
+                market: 'Market',
+                invest: 'Invest',
+                security: 'Security',
+                history: 'Transaction History'
+            };
+            
+            showNotification(`Switched to ${pageNames[page]}`, 'info');
+        }
         
-        function openInvestmentModal(crypto) {
-            // Set modal based on selected crypto
+        // Investment modal
+        function openInvestmentModal(crypto, plan = null) {
             const cryptoData = {
                 'BTC': { name: 'Bitcoin', price: 63420.50, symbol: 'BTC' },
                 'ETH': { name: 'Ethereum', price: 3250.75, symbol: 'ETH' },
                 'SOL': { name: 'Solana', price: 142.30, symbol: 'SOL' },
-                'ADA': { name: 'Cardano', price: 0.48, symbol: 'ADA' }
+                'ADA': { name: 'Cardano', price: 0.48, symbol: 'ADA' },
+                'BNB': { name: 'BNB', price: 580.20, symbol: 'BNB' },
+                'XRP': { name: 'XRP', price: 0.52, symbol: 'XRP' }
             };
             
             const data = cryptoData[crypto] || cryptoData['BTC'];
             
-            modalCryptoName.textContent = data.name;
-            cryptoPrice.textContent = `$${data.price.toLocaleString()}`;
+            // Set modal content
+            document.getElementById('modal-crypto-name').textContent = data.name;
+            document.getElementById('crypto-price').textContent = `$${data.price.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
             
             // Set active crypto option
-            cryptoOptions.forEach(option => {
+            document.querySelectorAll('.crypto-option').forEach(option => {
                 option.classList.remove('active');
                 if (option.getAttribute('data-crypto') === crypto) {
                     option.classList.add('active');
                 }
             });
             
-            // Calculate initial crypto amount
+            // If plan is provided, update amount
+            if (plan) {
+                const planAmounts = {
+                    'starter': 100,
+                    'growth': 500,
+                    'aggressive': 1000,
+                    'custom': 500
+                };
+                document.getElementById('investment-amount').value = planAmounts[plan] || 1000;
+            }
+            
+            // Update crypto amount
             updateCryptoAmount();
             
+            // Show modal
             investmentModal.classList.add('active');
         }
         
-        // Close modal
-        function closeModal() {
+        function closeInvestmentModal() {
             investmentModal.classList.remove('active');
         }
         
-        closeModalBtn.addEventListener('click', closeModal);
-        cancelInvestmentBtn.addEventListener('click', closeModal);
+        // Withdrawal modal
+        function openWithdrawalModal() {
+            updateNetAmount();
+            withdrawalModal.classList.add('active');
+        }
         
-        // Close modal when clicking outside
-        window.addEventListener('click', (e) => {
-            if (e.target === investmentModal) {
-                closeModal();
-            }
-        });
+        function closeWithdrawalModal() {
+            withdrawalModal.classList.remove('active');
+        }
         
-        // Crypto option selection
-        cryptoOptions.forEach(option => {
-            option.addEventListener('click', () => {
-                cryptoOptions.forEach(opt => opt.classList.remove('active'));
-                option.classList.add('active');
-                
-                const crypto = option.getAttribute('data-crypto');
-                const cryptoData = {
-                    'BTC': { name: 'Bitcoin', price: 63420.50, symbol: 'BTC' },
-                    'ETH': { name: 'Ethereum', price: 3250.75, symbol: 'ETH' },
-                    'SOL': { name: 'Solana', price: 142.30, symbol: 'SOL' }
-                };
-                
-                const data = cryptoData[crypto];
-                modalCryptoName.textContent = data.name;
-                cryptoPrice.textContent = `$${data.price.toLocaleString()}`;
-                updateCryptoAmount();
-            });
-        });
+        // Notification panel
+        function openNotificationPanel() {
+            notificationPanel.classList.add('active');
+        }
         
-        // Update crypto amount when investment amount changes
-        investmentAmount.addEventListener('input', updateCryptoAmount);
+        function closeNotificationPanel() {
+            notificationPanel.classList.remove('active');
+        }
         
+        // Update crypto amount based on investment
         function updateCryptoAmount() {
-            const amount = parseFloat(investmentAmount.value) || 0;
+            const amount = parseFloat(document.getElementById('investment-amount').value) || 0;
             const activeCrypto = document.querySelector('.crypto-option.active').getAttribute('data-crypto');
             
             const cryptoPrices = {
@@ -1143,128 +2715,243 @@
             const price = cryptoPrices[activeCrypto];
             const cryptoAmountValue = amount / price;
             
-            cryptoAmount.textContent = `${cryptoAmountValue.toFixed(4)} ${activeCrypto}`;
+            document.getElementById('crypto-amount').textContent = 
+                `${cryptoAmountValue.toFixed(4)} ${activeCrypto}`;
+        }
+        
+        // Update net withdrawal amount
+        function updateNetAmount() {
+            const amount = parseFloat(document.getElementById('withdrawal-amount').value) || 0;
+            const fee = 5.00;
+            const netAmount = amount - fee;
+            
+            document.getElementById('net-amount').textContent = 
+                `$${netAmount.toFixed(2)}`;
         }
         
         // Confirm investment
-        confirmInvestmentBtn.addEventListener('click', () => {
-            const amount = parseFloat(investmentAmount.value);
+        function confirmInvestment() {
+            const amount = parseFloat(document.getElementById('investment-amount').value);
             const crypto = document.querySelector('.crypto-option.active').getAttribute('data-crypto');
             
             if (!amount || amount < 10) {
-                alert('Please enter a valid investment amount (minimum $10).');
+                showNotification('Please enter a valid investment amount (minimum $10).', 'danger');
                 return;
             }
             
-            // In a real app, this would make an API call
-            alert(`Investment of $${amount.toFixed(2)} in ${crypto} confirmed!`);
-            closeModal();
-            investmentAmount.value = '';
+            if (amount > 5250) {
+                showNotification('Insufficient balance. Available: $5,250.00', 'danger');
+                return;
+            }
             
-            // Show success message
-            showNotification('Investment successful!', 'success');
-        });
-        
-        // Refresh market data
-        refreshMarketBtn.addEventListener('click', () => {
-            // In a real app, this would fetch fresh data from an API
-            refreshMarketBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Refreshing...';
-            refreshMarketBtn.disabled = true;
+            // Success
+            showNotification(`Investment of $${amount.toFixed(2)} in ${crypto} confirmed!`, 'success');
+            closeInvestmentModal();
+            document.getElementById('investment-amount').value = '';
             
+            // Update balance (in a real app, this would come from backend)
             setTimeout(() => {
-                refreshMarketBtn.innerHTML = 'Refresh Data';
-                refreshMarketBtn.disabled = false;
-                showNotification('Market data updated successfully!', 'success');
-            }, 1500);
-        });
-        
-        // Rebalance portfolio
-        rebalancePortfolioBtn.addEventListener('click', () => {
-            // In a real app, this would trigger a portfolio rebalancing algorithm
-            rebalancePortfolioBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Rebalancing...';
-            rebalancePortfolioBtn.disabled = true;
-            
-            setTimeout(() => {
-                rebalancePortfolioBtn.innerHTML = 'Rebalance Portfolio';
-                rebalancePortfolioBtn.disabled = false;
-                showNotification('Portfolio rebalanced successfully!', 'success');
-            }, 2000);
-        });
-        
-        // Notification system
-        function showNotification(message, type = 'info') {
-            // Create notification element
-            const notification = document.createElement('div');
-            notification.className = `notification-toast ${type}`;
-            notification.innerHTML = `
-                <div style="display: flex; align-items: center; gap: 10px;">
-                    <i class="fas fa-${type === 'success' ? 'check-circle' : 'info-circle'}" 
-                       style="color: ${type === 'success' ? 'var(--success)' : 'var(--primary)'};"></i>
-                    <div>${message}</div>
-                </div>
-            `;
-            
-            // Style the notification
-            notification.style.position = 'fixed';
-            notification.style.top = '20px';
-            notification.style.right = '20px';
-            notification.style.backgroundColor = 'var(--dark-light)';
-            notification.style.color = 'white';
-            notification.style.padding = '15px 20px';
-            notification.style.borderRadius = 'var(--border-radius)';
-            notification.style.boxShadow = 'var(--shadow)';
-            notification.style.zIndex = '1000';
-            notification.style.borderLeft = `4px solid ${type === 'success' ? 'var(--success)' : 'var(--primary)'}`;
-            notification.style.maxWidth = '350px';
-            
-            document.body.appendChild(notification);
-            
-            // Remove notification after 3 seconds
-            setTimeout(() => {
-                notification.style.opacity = '0';
-                notification.style.transform = 'translateX(100px)';
-                notification.style.transition = 'all 0.3s ease';
-                
-                setTimeout(() => {
-                    if (notification.parentNode) {
-                        notification.parentNode.removeChild(notification);
-                    }
-                }, 300);
-            }, 3000);
+                showNotification('Your portfolio has been updated.', 'info');
+            }, 1000);
         }
         
-        // Initialize with some sample notifications
-        setTimeout(() => {
-            showNotification('Welcome to CryptoVest! Your dashboard is ready.', 'success');
-        }, 1000);
+        // Confirm withdrawal
+        function confirmWithdrawal() {
+            const amount = parseFloat(document.getElementById('withdrawal-amount').value);
+            
+            if (!amount || amount < 10) {
+                showNotification('Please enter a valid withdrawal amount (minimum $10).', 'danger');
+                return;
+            }
+            
+            if (amount > 5250) {
+                showNotification('Insufficient balance. Available: $5,250.00', 'danger');
+                return;
+            }
+            
+            // Success
+            showNotification(`Withdrawal of $${amount.toFixed(2)} initiated. Funds will arrive in 2-3 business days.`, 'success');
+            closeWithdrawalModal();
+            document.getElementById('withdrawal-amount').value = '';
+        }
         
-        // Simulate price updates
-        function simulatePriceUpdates() {
+        // Mark all notifications as read
+        function markAllNotificationsAsRead() {
+            notificationBadge.textContent = '0';
+            notificationBadge.style.display = 'none';
+            showNotification('All notifications marked as read', 'success');
+            closeNotificationPanel();
+        }
+        
+        // Logout all devices
+        function logoutAllDevices() {
+            if (confirm('Are you sure you want to log out of all devices? You will need to log in again on this device.')) {
+                showNotification('Logged out of all devices successfully.', 'success');
+                // In a real app, this would call an API
+            }
+        }
+        
+        // Refresh market data
+        function refreshMarketData() {
+            const btn = document.getElementById('refresh-market');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Refreshing...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fas fa-sync-alt"></i> Refresh Data';
+                btn.disabled = false;
+                showNotification('Market data updated successfully!', 'success');
+                
+                // Simulate price changes
+                simulatePriceUpdate();
+            }, 1500);
+        }
+        
+        // Rebalance portfolio
+        function rebalancePortfolio() {
+            const btn = document.getElementById('rebalance-portfolio');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Rebalancing...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fas fa-balance-scale"></i> Rebalance Portfolio';
+                btn.disabled = false;
+                showNotification('Portfolio rebalanced successfully!', 'success');
+            }, 2000);
+        }
+        
+        // Export history
+        function exportHistory() {
+            showNotification('Exporting transaction history... You will receive an email shortly.', 'info');
+            
+            setTimeout(() => {
+                showNotification('Transaction history exported successfully. Check your email.', 'success');
+            }, 2000);
+        }
+        
+        // Price simulation
+        function startPriceSimulation() {
+            // Update prices every 15 seconds
+            setInterval(simulatePriceUpdate, 15000);
+        }
+        
+        function simulatePriceUpdate() {
             const priceElements = document.querySelectorAll('.table-row div:nth-child(2)');
             const changeElements = document.querySelectorAll('.table-row div:nth-child(3)');
+            const sevenDayElements = document.querySelectorAll('.table-row div:nth-child(4)');
             
-            // Small random price fluctuations
             priceElements.forEach((el, index) => {
-                const currentPrice = parseFloat(el.textContent.replace('$', '').replace(',', ''));
-                const change = (Math.random() - 0.5) * 0.02; // -1% to +1%
+                const currentPrice = parseFloat(el.textContent.replace('$', '').replace(/,/g, ''));
+                const change = (Math.random() - 0.5) * 0.03; // -1.5% to +1.5%
                 const newPrice = currentPrice * (1 + change);
                 
+                // Update price
                 el.textContent = `$${newPrice.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
                 
-                // Update change indicator
+                // Update 24h change
                 const changeElement = changeElements[index];
-                const changePercent = (change * 100).toFixed(1);
+                const changePercent = (change * 100).toFixed(2);
                 
                 if (change >= 0) {
                     changeElement.innerHTML = `<span class="positive">+${changePercent}%</span>`;
                 } else {
                     changeElement.innerHTML = `<span class="negative">${changePercent}%</span>`;
                 }
+                
+                // Update 7d change occasionally
+                if (Math.random() > 0.7) {
+                    const sevenDayChange = (Math.random() - 0.3) * 0.1; // -3% to +7%
+                    const sevenDayElement = sevenDayElements[index];
+                    const sevenDayPercent = (sevenDayChange * 100).toFixed(2);
+                    
+                    if (sevenDayChange >= 0) {
+                        sevenDayElement.innerHTML = `<span class="positive">+${sevenDayPercent}%</span>`;
+                    } else {
+                        sevenDayElement.innerHTML = `<span class="negative">${sevenDayPercent}%</span>`;
+                    }
+                }
             });
         }
         
-        // Update prices every 10 seconds
-        setInterval(simulatePriceUpdates, 10000);
+        // Notification system
+        function showNotification(message, type = 'info') {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `notification-toast ${type}`;
+            
+            const icons = {
+                success: 'check-circle',
+                danger: 'exclamation-triangle',
+                warning: 'exclamation-circle',
+                info: 'info-circle'
+            };
+            
+            notification.innerHTML = `
+                <div style="display: flex; align-items: flex-start; gap: 15px;">
+                    <i class="fas fa-${icons[type] || 'info-circle'}" 
+                       style="color: ${type === 'success' ? 'var(--success)' : 
+                                type === 'danger' ? 'var(--danger)' : 
+                                type === 'warning' ? 'var(--warning)' : 'var(--primary)'}; 
+                              font-size: 20px; margin-top: 2px;"></i>
+                    <div style="flex-grow: 1;">
+                        <div style="font-weight: 600; margin-bottom: 5px;">${type.charAt(0).toUpperCase() + type.slice(1)}</div>
+                        <div>${message}</div>
+                    </div>
+                    <i class="fas fa-times close-notification" style="cursor: pointer; color: var(--gray);"></i>
+                </div>
+            `;
+            
+            // Style the notification
+            notification.style.position = 'fixed';
+            notification.style.top = '30px';
+            notification.style.right = '30px';
+            notification.style.backgroundColor = 'var(--dark-light)';
+            notification.style.color = 'white';
+            notification.style.padding = '20px';
+            notification.style.borderRadius = 'var(--border-radius)';
+            notification.style.boxShadow = 'var(--shadow)';
+            notification.style.zIndex = '9999';
+            notification.style.borderLeft = `4px solid ${type === 'success' ? 'var(--success)' : 
+                                             type === 'danger' ? 'var(--danger)' : 
+                                             type === 'warning' ? 'var(--warning)' : 'var(--primary)'}`;
+            notification.style.maxWidth = '400px';
+            notification.style.width = '90%';
+            notification.style.transform = 'translateX(100px)';
+            notification.style.opacity = '0';
+            notification.style.transition = 'all 0.3s ease';
+            
+            // Close button
+            notification.querySelector('.close-notification').addEventListener('click', () => {
+                notification.style.opacity = '0';
+                notification.style.transform = 'translateX(100px)';
+                
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            });
+            
+            document.body.appendChild(notification);
+            
+            // Animate in
+            setTimeout(() => {
+                notification.style.opacity = '1';
+                notification.style.transform = 'translateX(0)';
+            }, 10);
+            
+            // Remove notification after 5 seconds
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transform = 'translateX(100px)';
+                
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 5000);
+        }
     </script>
 </body>
 </html>
